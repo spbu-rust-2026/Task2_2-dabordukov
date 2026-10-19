@@ -15,17 +15,21 @@ fn process(_text: String) -> String {
         None => (0, 0),
     };
 
-    let mut new_string = String::new();
-    new_string.push_str(&_text[start..end]);
-    new_string.push('\n');
-    let mut _text_copy = _text;
-    _text_copy.push_str(" rust");
-    new_string.push_str(_text_copy.as_str());
-    new_string.push('\n');
-    new_string.push_str(_text_copy.as_str());
+    let mut new_string = _text;
+    new_string.push_str(" rust");
     new_string.push('\n');
 
-    return new_string;
+    let mut result = String::new();
+    result.push_str(&new_string[start..end]);
+    result.push('\n');
+
+    let mut_ref_string = &mut new_string;
+    result.push_str(mut_ref_string);
+
+    let ref_string = &new_string;
+    result.push_str(ref_string);
+
+    return result;
 }
 
 #[cfg(test)]
